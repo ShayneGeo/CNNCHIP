@@ -192,7 +192,7 @@ if run_button:
                 if chip_array.shape[-1] > 1:
                     st.subheader(f"Second Channel of Chip at Index {selected_index}")
                     fig_ch2, ax_ch2 = plt.subplots(figsize=(6, 6))
-                    ax_ch2.imshow(chip_array[fixed_index][..., 1], cmap='gray')
+                    ax_ch2.imshow(chip_array[selected_index][..., 1], cmap='gray')
                     ax_ch2.set_title("Channel 1 (second band)")
                     ax_ch2.axis('off')
                     st.pyplot(fig_ch2)
