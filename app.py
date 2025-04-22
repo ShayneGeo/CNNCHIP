@@ -188,6 +188,17 @@ if run_button:
                 gdf.iloc[[selected_index]].plot(ax=ax2, color="red", markersize=50)
                 ax2.set_title("Chip Location (in red)")
                 st.pyplot(fig2)
+                # Plot the second channel only
+                if chip_array.shape[-1] > 1:
+                    st.subheader(f"Second Channel of Chip at Index {selected_index}")
+                    fig_ch2, ax_ch2 = plt.subplots(figsize=(6, 6))
+                    ax_ch2.imshow(chip_array[fixed_index][..., 1], cmap='gray')
+                    ax_ch2.set_title("Channel 1 (second band)")
+                    ax_ch2.axis('off')
+                    st.pyplot(fig_ch2)
+                else:
+                    st.info("This chip only contains one channel.")
+
 
 
 
