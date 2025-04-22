@@ -265,13 +265,23 @@ if run_button:
                 st.write(f"Chip array shape: {chip_array.shape}")
 
                 # Plot the first chip
-                st.subheader("Example Chip")
+                # st.subheader("Example Chip")
+                # fig, axs = plt.subplots(1, chip_array.shape[-1], figsize=(4 * chip_array.shape[-1], 4))
+                # for i in range(chip_array.shape[-1]):
+                #     axs[i].imshow(chip_array[0][..., i], cmap='gray')
+                #     axs[i].set_title(f"Channel {i}")
+                #     axs[i].axis('off')
+                # st.pyplot(fig)
+                st.subheader("Example Chip Viewer")
+                chip_index = st.slider("Select Chip Index", min_value=0, max_value=len(chips)-1, value=0)
+                
                 fig, axs = plt.subplots(1, chip_array.shape[-1], figsize=(4 * chip_array.shape[-1], 4))
                 for i in range(chip_array.shape[-1]):
-                    axs[i].imshow(chip_array[0][..., i], cmap='gray')
+                    axs[i].imshow(chip_array[chip_index][..., i], cmap='gray')
                     axs[i].set_title(f"Channel {i}")
                     axs[i].axis('off')
                 st.pyplot(fig)
+
 
                 # Optionally allow download
                 if st.button("Download Chip Array as .npy"):
