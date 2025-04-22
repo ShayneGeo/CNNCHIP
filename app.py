@@ -184,6 +184,10 @@ if run_button:
         st.error("Shapefile or TIFF files not found in expected paths. Make sure 'myfolder/' directory exists in repo.")
 
 
-
+# Close rasters and clean memory
+for r in raster_datasets:
+    r.close()
+del chip_array, chips, gdf, raster_datasets
+gc.collect()
 
 
