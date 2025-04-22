@@ -105,6 +105,7 @@ import matplotlib.pyplot as plt
 import os
 import time
 import gc
+from rasterio.plot import plotting_extent
 
 st.set_page_config(page_title="Image Chip Viewer", layout="wide")
 st.title("🛰️ Image Chip Generator from GitHub Shapefile + TIFF")
@@ -145,7 +146,8 @@ if run_button:
             fig, axs = plt.subplots(1, len(raster_datasets), figsize=(5 * len(raster_datasets), 5))
             for i, r in enumerate(raster_datasets):
                 img = r.read(1)
-                extent = rasterio.plot.plotting_extent(r)
+                extent = plotting_extent(r)
+
                 axs[i].imshow(img, cmap='gray', extent=extent)
                 gdf.plot(ax=axs[i], color='red', markersize=10)
                 axs[i].set_title(f"Raster {i+1}: {os.path.basename(rasterfiles[i])}")
