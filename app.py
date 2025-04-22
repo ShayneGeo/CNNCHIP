@@ -115,9 +115,9 @@ run_button = st.button("Run Chip Generation")
 # --- File paths in repo ---
 shapefile = "myfolder/Antelope.shp"
 rasterfiles = [
-    "myfolder/LC22_F13_230.tif",
-    "myfolder/LC20_Asp_220_wgs.tif",
-    "myfolder/LC20_SlpD_220.tif"
+    "myfolder/LC20_Asp_220_SMALL.tif",
+    "myfolder/LC20_SlpD_220_SMALL.tif",
+    "myfolder/LC22_EVH_220_SMALL.tif"
 ]
 
 if run_button:
