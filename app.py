@@ -109,7 +109,11 @@ from rasterio.plot import plotting_extent
 
 st.set_page_config(page_title="Image Chip Viewer", layout="wide")
 st.title("🛰️ Image Chip Generator from GitHub Shapefile + TIFF")
-
+st.markdown(
+    """
+    This `ImageChipDataset` function reads point locations from a shapefile and, for each point, “clips out” a small multi-band image patch (a “chip”) directly from your geospatial raster layers—no pre-processing or bulk stack creation required. By computing only the handful of pixels you actually need (and normalizing them on the fly), you save both storage and memory, and you can quickly experiment with different chip sizes or subsets of points without re-running a heavy batch job. This dynamic approach is invaluable when tuning deep learning pipelines (e.g., CNNs) or doing rapid quality checks: you instantly see exactly what data goes into your model, you avoid shipping around huge pre-made datasets, and you keep your workflow nimble and responsive as you iterate on feature selection, model architecture, or sample size.
+    """
+)
 # --- Parameters ---
 subset = st.number_input("Number of Points to Process", min_value=1, max_value=10000, value=1000)
 chip_size = st.selectbox("Chip Size (pixels)", [16, 32, 64, 128, 256], index=1)
