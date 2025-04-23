@@ -193,11 +193,11 @@ if run_button:
                 st.pyplot(fig)
 
 
-                # Optionally allow download
-                if st.button("Download Chip Array as .npy"):
-                    np.save("chips.npy", chip_array)
-                    with open("chips.npy", "rb") as f:
-                        st.download_button("Download chips.npy", f, file_name="chips.npy")
+                # # Optionally allow download
+                # if st.button("Download Chip Array as .npy"):
+                #     np.save("chips.npy", chip_array)
+                #     with open("chips.npy", "rb") as f:
+                #         st.download_button("Download chips.npy", f, file_name="chips.npy")
 
             # --- Memory Cleanup ---
             for r in raster_datasets:
