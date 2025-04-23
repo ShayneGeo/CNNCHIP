@@ -304,12 +304,12 @@ if run_button:
                     chip = (chip - mins[i]) / (maxs[i] - mins[i])
                     chip_stack.append(chip)
             
-                    # Also get the value at the center of the chip (i.e., at (row, col))
-                    center_val = r.read(1)[row, col]
+                    center_val = r.read(1, window=rasterio.windows.Window(col, row, 1, 1))[0, 0]
                     center_val = (center_val - mins[i]) / (maxs[i] - mins[i])
                     center_values.append(center_val)
             
                 return np.concatenate(chip_stack, axis=-1), np.array(center_values)
+
 
 
             chips = []
