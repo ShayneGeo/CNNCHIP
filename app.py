@@ -343,6 +343,7 @@ if run_button:
             
             st.write(f"Chip array shape: {chip_array.shape}")
             st.write(f"Metadata array shape: {metadata_array.shape}")
+            st.write(f"{metadata_array}")
             
 
 
