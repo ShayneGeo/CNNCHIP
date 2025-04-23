@@ -353,6 +353,9 @@ if run_button:
                     st.warning(f"Skipping point {idx} due to error: {e}")
             end_time = time.time()
             st.success(f"Generated {len(chips)} chips in {end_time - start_time:.2f} seconds")
+            estimated_total_time = (end_time - start_time) * (1_000_000 / len(chips))
+            st.info(f"Estimated time for 1,000,000 chips: {estimated_total_time / 60:.2f} minutes (~{estimated_total_time / 3600:.2f} hours)")
+
 
             if chips:
                 chip_array = np.stack(chips)
