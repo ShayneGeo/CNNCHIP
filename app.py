@@ -338,6 +338,12 @@ if run_button:
                     axs[i].set_title(f"Channel {i}")
                     axs[i].axis('off')
                 st.pyplot(fig)
+            chip_array = np.stack(chips)
+            metadata_array = np.stack(metadata)
+            
+            st.write(f"Chip array shape: {chip_array.shape}")
+            st.write(f"Metadata array shape: {metadata_array.shape}")
+            
 
 
                 # # Optionally allow download
