@@ -307,13 +307,25 @@ if run_button:
             #         center_val = r.read(1, window=rasterio.windows.Window(col, row, 1, 1))[0, 0]
             #         center_val = (center_val - mins[i]) / (maxs[i] - mins[i])
             #         center_values.append(center_val)
+            def is_window_within_bounds(window, height, width):
+                return (
+                    window.col_off >= 0 and
+                    window.row_off >= 0 and
+                    window.col_off + window.width <= width and
+                    window.row_off + window.height <= height
+                )
+
             
             #     return np.concatenate(chip_stack, axis=-1), np.array(center_values)
             def generate_chip_with_metadata(point):
-                x, y = point.x, point.y  # lon, lat
+                x, y = point.x, point.y
                 row, col = raster_datasets[0].index(x, y)
                 h = chip_size // 2
                 win = rasterio.windows.Window(col - h, row - h, chip_size, chip_size)
+            
+                if not is_window_within_bounds(win, raster_datasets[0].height, raster_datasets[0].width):
+                    raise ValueError("Point too close to edge of raster")
+
                 
                 chip_stack = []
                 center_values = []
