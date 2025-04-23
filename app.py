@@ -204,10 +204,23 @@ if run_button:
                 #         st.download_button("Download chips.npy", f, file_name="chips.npy")
 
             # --- Memory Cleanup ---
-            for r in raster_datasets:
-                r.close()
-            del chip_array, chips, gdf, raster_datasets
-            gc.collect()
+            # --- Memory Cleanup ---
+            try:
+                for r in raster_datasets:
+                    r.close()
+                # only delete these if they exist
+                if 'chip_array' in locals():
+                    del chip_array
+                if 'chips' in locals():
+                    del chips
+                if 'gdf' in locals():
+                    del gdf
+                if 'raster_datasets' in locals():
+                    del raster_datasets
+                gc.collect()
+            except Exception:
+                pass
+
 
     else:
         st.error("Shapefile or TIFF files not found in expected paths. Make sure 'myfolder/' directory exists in repo.")
