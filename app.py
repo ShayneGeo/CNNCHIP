@@ -290,8 +290,27 @@ if run_button:
                 axs[i].axis('off')
             st.pyplot(fig)
 
+            # def generate_chip_with_metadata(point):
+            #     x, y = point.x, point.y
+            #     row, col = raster_datasets[0].index(x, y)
+            #     h = chip_size // 2
+            #     win = rasterio.windows.Window(col - h, row - h, chip_size, chip_size)
+                
+            #     chip_stack = []
+            #     center_values = []
+            #     for i, r in enumerate(raster_datasets):
+            #         chip = r.read(1, window=win)
+            #         chip = np.expand_dims(chip, axis=-1)
+            #         chip = (chip - mins[i]) / (maxs[i] - mins[i])
+            #         chip_stack.append(chip)
+            
+            #         center_val = r.read(1, window=rasterio.windows.Window(col, row, 1, 1))[0, 0]
+            #         center_val = (center_val - mins[i]) / (maxs[i] - mins[i])
+            #         center_values.append(center_val)
+            
+            #     return np.concatenate(chip_stack, axis=-1), np.array(center_values)
             def generate_chip_with_metadata(point):
-                x, y = point.x, point.y
+                x, y = point.x, point.y  # lon, lat
                 row, col = raster_datasets[0].index(x, y)
                 h = chip_size // 2
                 win = rasterio.windows.Window(col - h, row - h, chip_size, chip_size)
@@ -308,7 +327,16 @@ if run_button:
                     center_val = (center_val - mins[i]) / (maxs[i] - mins[i])
                     center_values.append(center_val)
             
+                # Add normalized lat/lon to the end of the metadata vector
+                #center_values.append((y + 90) / 180)  # normalize latitude [-90,90] → [0,1]
+                #center_values.append((x + 180) / 360)  # normalize longitude [-180,180] → [0,1]
+
+                center_values.append(y)  # latitude
+                center_values.append(x)  # longitude
+
+                
                 return np.concatenate(chip_stack, axis=-1), np.array(center_values)
+
 
 
 
